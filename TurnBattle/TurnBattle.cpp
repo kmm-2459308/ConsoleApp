@@ -14,15 +14,15 @@ void SetTurnBattle(TurnBattle* btl, Character* player, Character* enemy , Charac
 	btl->player = player;
 	btl->enemy = enemy;
 	btl->yaruo = yaruo;
-	//btl->yaranaio = yaranaio;
+	btl->yaranaio = yaranaio;
 }
 // イントロ「～が現れた!!」表示
 void IntroTurnBattle(TurnBattle* btl)
 {
 	DrawBattleScreen(btl);
 	// ★ここで「(敵の名前)が　あらわれた!!」を表示してください
-	//printf("%sが　あらわれた!!\n", btl->enemy->name);
-	printf("%sが　あらわれた!!\n", btl->yaruo->name);
+	printf("%sが　あらわれた!!\n", btl->enemy->name);
+	//printf("%sが　あらわれた!!\n", btl->yaruo->name);
 	//printf("%sが　あらわれた!!\n", btl->yaranaio->name);
 	WaitKey();
 }
@@ -31,7 +31,7 @@ void StartTurnBattle(TurnBattle* btl)
 {
 	btl->turn = 1;
 	StartCharacter(btl->player);
-	//StartCharacter(btl->enemy);
+	StartCharacter(btl->enemy);
 	StartCharacter(btl->yaruo);
 	//StartCharacter(btl->yaranaio);
 }
@@ -41,15 +41,15 @@ void DrawBattleScreen(TurnBattle* btl)
 	ClearScreen();
 	IndicatePlayer(btl->player);
 	putchar('\n');
-	//IndicateEnemy(btl->enemy);
-	//putchar('\n');
-	IndicateEnemy(btl->yaruo);
+	IndicateEnemy(btl->enemy);
 	putchar('\n');
+	//IndicateEnemy(btl->yaruo);
+	//putchar('\n');
 	//IndicateEnemy(btl->yaranaio);
 	//putchar('\n');
 }
 // プレーヤのターン実行
-/*bool ExecPlayerTurn(TurnBattle* btl, Command cmd)
+bool ExecPlayerTurn(TurnBattle* btl, Command cmd)
 {
 	execCommand(btl, cmd, btl->player, btl->enemy);
 	if (IsDeadCharacter(btl->enemy)) {
@@ -61,8 +61,8 @@ void DrawBattleScreen(TurnBattle* btl)
 		return true;
 	}
 	return IsEscapeCharacter(btl->player);
-}*/
-bool ExecPlayerTurn(TurnBattle* btl, Command cmd)
+}
+/*bool ExecPlayerTurn(TurnBattle* btl, Command cmd)
 {
 	execCommand(btl, cmd, btl->player, btl->yaruo);
 	if (IsDeadCharacter(btl->yaruo)) {
@@ -74,7 +74,7 @@ bool ExecPlayerTurn(TurnBattle* btl, Command cmd)
 		return true;
 	}
 
-	/*execCommand(btl, cmd, btl->player, btl->yaranaio);
+	execCommand(btl, cmd, btl->player, btl->yaranaio);
 	if (IsDeadCharacter(btl->yaranaio)) {
 		SetEraseAa(btl->yaranaio);
 		DrawBattleScreen(btl);
@@ -82,11 +82,11 @@ bool ExecPlayerTurn(TurnBattle* btl, Command cmd)
 		printf("%sをたおした！\n", btl->yaranaio->name);
 		WaitKey();
 		return true;
-	}*/
+	}
 	return IsEscapeCharacter(btl->player);
-}
+}*/
 // 敵のターン実行
-/*bool ExecEnemyTurn(TurnBattle* btl, Command cmd)
+bool ExecEnemyTurn(TurnBattle* btl, Command cmd)
 {
 	execCommand(btl, cmd, btl->enemy, btl->player);
 	if (IsDeadCharacter(btl->player)) {
@@ -97,9 +97,9 @@ bool ExecPlayerTurn(TurnBattle* btl, Command cmd)
 		return true;
 	}
 	return false;
-}*/
+}
 
-bool ExecEnemyTurn(TurnBattle* btl, Command cmd)
+/*bool ExecEnemyTurn(TurnBattle* btl, Command cmd)
 {
 	execCommand(btl, cmd, btl->yaruo, btl->player);
 	if (IsDeadCharacter(btl->player)) {
@@ -109,16 +109,16 @@ bool ExecEnemyTurn(TurnBattle* btl, Command cmd)
 		WaitKey();
 		return true;
 	}
-	/*execCommand(btl, cmd, btl->yaranaio, btl->player);
+	execCommand(btl, cmd, btl->yaranaio, btl->player);
 	if (IsDeadCharacter(btl->player)) {
 		DrawBattleScreen(btl);
 		// ★ここで「"あなたは　しにました」を表示してください
 		printf("あなたは　しにました\n");
 		WaitKey();
 		return true;
-	}*/
+	}
 	return false;
-}
+}*/
 // コマンド実行(offense:攻撃キャラ defense:防御キャラ)
 static void execCommand(TurnBattle* btl, Command cmd, Character* offense, Character* defense)
 {
