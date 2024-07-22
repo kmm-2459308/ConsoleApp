@@ -40,12 +40,20 @@ const BlockShape blockShapes[] = {
 			{0,1,1},
 		}
 	},
-	{   // S字型
+	{   // 2字型
 		3,
 		{
 			{0,0,0},
 			{1,1,0},
 			{0,1,1},
+		}
+	},
+	{   // S字型
+		3,
+		{
+			{0,0,0},
+			{0,1,1},
+			{1,1,0},
 		}
 	},
 };
@@ -81,6 +89,14 @@ void RotateShape(BlockShape* shape)
 	// shapeを走査します(x,y)
 	// 反時計回りの回転 workの(x,y)を shapeの(y,size-1-x)へコピーします
 	//
+	for (int y = 0; y < shape->size; y++)
+	{
+		for (int x = 0; x < shape->size; x++)
+		{
+			bool f = GetShapePattern(&work, x, y);
+			SetShapePattern(shape, y, shape->size - 1 - x, f);
+		}
+	}
 }
 // 指定位置のパターンセット
 void SetShapePattern(BlockShape* shape, int x, int y, bool value)
@@ -90,6 +106,10 @@ void SetShapePattern(BlockShape* shape, int x, int y, bool value)
 	// isInShapePattern()を確認して、shapeのpqtternの(x,y)へvalueを書き込みます
 	// isInShapePattern()外なら、なにもしません
 	//
+	if (isInShapePattern(x, y))
+	{
+		shape->pattern[y][x] = value;
+	}
 }
 // 指定位置のパターン取得
 bool GetShapePattern(BlockShape* shape, int x, int y)
@@ -99,6 +119,11 @@ bool GetShapePattern(BlockShape* shape, int x, int y)
 	// isInShapePattern()を確認して、shapeのpqtternの(x,y)の値を返します
 	// isInShapePattern()外なら、falseを返します
 	//
+	if (isInShapePattern(x, y))
+	{
+		return shape->pattern[y][x];
+	}
+	return false;
 }
 // 座標がパターン内か?
 static bool isInShapePattern(int x, int y)

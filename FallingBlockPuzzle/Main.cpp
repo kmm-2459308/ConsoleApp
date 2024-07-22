@@ -42,6 +42,9 @@ static void game()
 			// ★ここをコーディングしてください
 			//  MoveDownFallBlock()をよびだします
 			//
+			{
+				MoveDownFallBlock(stage);
+			}
 		}
 		// キー入力で落ちブロック移動・回転
 		if (KeyAvailable()) {
@@ -55,6 +58,22 @@ static void game()
 				// 入力されたキーが　" " (スペース)なら fallBlockを回転させます
 				//  (RotateFallBlock()を呼ぶ, changeをセットする )
 				//
+			case ARROW_DOWN:
+					MoveFallBlock(&fallBlock, 0, 1);
+					change = true;
+					break;
+			case ARROW_LEFT:
+				MoveFallBlock(&fallBlock, -1, 0);
+				change = true;
+				break;
+			case ARROW_RIGHT:
+				MoveFallBlock(&fallBlock, 1, 0);
+				change = true;
+				break;
+			case ' ':
+				RotateFallBlock(&fallBlock);
+				change = true;
+				break;
 			}
 			if (change) {
 				// 移動または回転した落ちブロックがフィールド衝突なければ、更新

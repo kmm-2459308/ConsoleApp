@@ -13,6 +13,8 @@ void MoveFallBlock(FallBlock* fallBlock, int ofsx, int ofsy)
 	// fallBlockのx座標 に ofsx を足しこみます
 	// fallBlockのy座標 に ofsy を足しこみます
 	//
+	fallBlock->x += ofsx;
+	fallBlock->y += ofsy;
 }
 // 落ちブロックの回転
 void RotateFallBlock(FallBlock* fallBlock)
@@ -21,6 +23,7 @@ void RotateFallBlock(FallBlock* fallBlock)
 	// ★ここをコーディングしてください
 	//　fallBlockのshape の回転を呼び出します
 	//
+	RotateShape(&fallBlock->shape);
 }
 // ランダムな落ちブロックをセット
 void SetRandomFallBlock(FallBlock* fallBlock, int x, int y)
@@ -31,6 +34,15 @@ void SetRandomFallBlock(FallBlock* fallBlock, int x, int y)
 	// (2) 0～3 の乱数を取得して、その回数 fallBlockのshapeを回転します
 	// (3) x,y を fallBlockのx,y座標に代入します
 	//
+	int idx = GetRand(blockShapesSize);
+	SetShape(&fallBlock->shape, idx);
+	int rotateCount = GetRand(4);
+	for (int i = 0; i < rotateCount; i++)
+	{
+		RotateShape(&fallBlock->shape);
+	}
+	fallBlock->x = x;
+	fallBlock->y = y;
 }
 // 落ちブログをプリント
 void PrintFallBlock(FallBlock* fallBlock)
