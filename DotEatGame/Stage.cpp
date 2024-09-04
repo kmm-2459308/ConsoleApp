@@ -83,7 +83,6 @@ void DrawMaze(Stage* stage)
 	// screenのmazeのプレーヤの位置にプレーヤidを書きこみます
 	// stageのモンスターを走査します
 	// screenのmazeのモカターの位置にモンスターのidを書き込みます
-	// Mazeを表示
 	//
 	Character* player = stage->player;
 	SetMaze(&screen, player->pos.x, player->pos.y, player->id);
@@ -92,13 +91,14 @@ void DrawMaze(Stage* stage)
 		Character* monster = stage->monster[i];
 		SetMaze(&screen, monster->pos.x, monster->pos.y, monster->id);
 	}
-	ClearScreen();
-	//
+	
+	// Mazeを表示
 	// ★ここをコーディングしてください
 	// screenのmazeを走査します。(x,y)
 	// maze(x,y)の値から GetMazeAA()で文字列を取得して表示します。
 	//
-
+	
+	ClearScreen();
 	for (int y = 0; y < MAZE_HEIGHT; y++)
 	{
 		for (int x = 0; x < MAZE_WIDTH; x++)
@@ -127,7 +127,7 @@ bool IsGameOver(Stage* stage)
 	Character* player = stage->player;
 	for (int i = 0; i < stage->monsterNum; i++)
 	{
-		Character* monster = stage->monster[i];
+		Character *monster = stage->monster[i];
 		if (Vector2Equ(monster->pos, player->pos))
 		{
 			return true;

@@ -111,7 +111,7 @@ void DrawCongratulations()
 	{
 		if (i == MAZE_HEIGHT / 2)
 		{
-			printf("　　C O N G R A T U L A T I O N S\n");
+			printf("　　C O N G R A T U L A T I O N S !\n");
 		}
 		else
 		{

@@ -40,7 +40,7 @@ Vector2 GetCharacterDir(Character* ch)
 		x = (ch->pos.x == 0) ? +1 : -1;
 	}
 	int y = ch->pos.y - ch->lastPos.y;
-	if (y < -1 || 1 < x) {
+	if (y < -1 || 1 < y) {
 		// 下端→上端、または、下端←上端
 		y = (ch->pos.y == 0) ? +1 : -1;
 	}
