@@ -21,7 +21,8 @@ static void DrawMap_HorizontalWall(Stage* stage, int y, Direction dir);
 void InitializeStage(Stage* stage)
 {
 	GenerateMap(stage);
-	InitCharacter(&stage->player, { 0,0 }, DIR_NORTH);
+	//InitCharacter(&stage->player, { 0,0 }, DIR_NORTH);
+	InitCharacter(&stage->player, { 0,7 }, DIR_NORTH);
 	SetVector2(&stage->goal, GOAL_X, GOAL_Y);
 	stage->isForMap = false;
 }
@@ -94,7 +95,7 @@ void DrawMap(Stage* stage)
 
 		for (int x = 0; x < MAZE_WIDTH; x++) {
 			Vector2 pos = { x,y };
-			const char* floor = "Å@";
+			const char* floor = "  ";
 			if (Vector2Equ(pos, player->pos)) {
 				static const char* directionAA[] = {
 					"Å™",  // DIR_NORTH
