@@ -21,7 +21,7 @@ static void DrawMap_HorizontalWall(Stage* stage, int y, Direction dir);
 void InitializeStage(Stage* stage)
 {
 	GenerateMap(stage);
-	InitCharacter(&stage->player, { 0,0 }, DIR_NORTH);
+	InitCharacter(&stage->player, { 0,7 }, DIR_NORTH);
 	SetVector2(&stage->goal, GOAL_X, GOAL_Y);
 	stage->isForMap = false;
 }
