@@ -83,6 +83,8 @@ static void GenerateMap(Stage* stage)
 			curPos = GetVector2List(toDigWallPos, 0);
 		}
 	}
+	FinalizeIntList(canDigDirection);   // š‚±‚±‚ª”²‚¯‚Ä‚¢‚Ü‚µ‚½
+	FinalizeVector2List(toDigWallPos);  // š‚±‚±‚ª”²‚¯‚Ä‚¢‚Ü‚µ‚½
 }
 // ƒ}ƒbƒv‚ğ•`‰æ
 void DrawMap(Stage* stage)
