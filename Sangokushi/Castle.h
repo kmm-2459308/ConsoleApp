@@ -1,5 +1,5 @@
-//======================================
-//	O‘u  é
+ï»¿//======================================
+//	ä¸‰å›½å¿—  åŸ
 //======================================
 #ifndef __CASTLE_H
 #define __CASTLE_H
@@ -9,35 +9,35 @@
 const int CONNECTED_SIZE = 10;
 
 typedef struct {
-    const char* name;    // –¼‘O
-    LordId owner;        // éå
-    int troopCount;      // •º”
-    CastleId connectedList[CONNECTED_SIZE]; // Ú‘±‚³‚ê‚½é‚ÌƒŠƒXƒg
-    int  curx, cury;     // •`‰æˆÊ’u
-    const char* mapName; // ƒ}ƒbƒvã‚Ì–¼‘O
+    const char* name;    // åå‰
+    LordId owner;        // åŸä¸»
+    int troopCount;      // å…µæ•°
+    CastleId connectedList[CONNECTED_SIZE]; // æ¥ç¶šã•ã‚ŒãŸåŸã®ãƒªã‚¹ãƒˆ
+    int  curx, cury;     // æç”»ä½ç½®
+    const char* mapName; // ãƒãƒƒãƒ—ä¸Šã®åå‰
 } Castle;
 
 extern Castle castles[];
 
-// é‚Ì–¼‘O‚ğæ“¾
+// åŸã®åå‰ã‚’å–å¾—
 const char* GetCastleName(Castle* castle);
-// éåID‚ğæ“¾
+// åŸä¸»IDã‚’å–å¾—
 LordId GetCastleOwner(Castle* castle);
-// •º”‚ğæ“¾
+// å…µæ•°ã‚’å–å¾—
 int GetCastleTroopCount(Castle* castle);
-// ‹ß—×‚ÌéƒŠƒXƒg‚ğæ“¾
+// è¿‘éš£ã®åŸãƒªã‚¹ãƒˆã‚’å–å¾—
 CastleId* GetCastleConnectedList(Castle* castle);
-// •`‰æXÀ•W‚ğæ“¾
+// æç”»Xåº§æ¨™ã‚’å–å¾—
 int GetCastleCurx(Castle* castle);
-// •`‰æYÀ•W‚ğæ“¾
+// æç”»Yåº§æ¨™ã‚’å–å¾—
 int GetCastleCury(Castle* castle);
-// ƒ}ƒbƒvã‚Ì–¼‘O‚ğæ“¾
+// ãƒãƒƒãƒ—ä¸Šã®åå‰ã‚’å–å¾—
 const char* GetCastleMapName(Castle* castle);
-// •º”‚ğ‘ã“ü‚·‚é
+// å…µæ•°ã‚’ä»£å…¥ã™ã‚‹
 void SetCastleTroopCount(Castle* castle, int troopCount);
-// éå‚ğƒZƒbƒg
+// åŸä¸»ã‚’ã‚»ãƒƒãƒˆ
 void SetCastleOwner(Castle* castle, LordId owner);
-// •º”‚É‰ÁZ‚·‚é
+// å…µæ•°ã«åŠ ç®—ã™ã‚‹
 void AddCastleTroopCount(Castle* castle, int add);
 
 #endif //  __CASTLE_H

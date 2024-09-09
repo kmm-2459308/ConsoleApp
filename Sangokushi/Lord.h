@@ -1,16 +1,16 @@
-//======================================
-//	O‘u  éå
+ï»¿//======================================
+//	ä¸‰å›½å¿—  åŸä¸»
 //======================================
 #ifndef __LORD_H
 #define __LORD_H
 
 #include "LordId.h"
 
-// éå‚Ì–¼‚ğæ“¾
+// åŸä¸»ã®åã‚’å–å¾—
 const char* GetLordFirstName(LordId id);
-// éå‚Ì©‚ğæ“¾
+// åŸä¸»ã®å§“ã‚’å–å¾—
 const char* GetLordFamilyName(LordId id);
-// éå‚Ìƒ}ƒbƒvã‚Ì–¼‘O‚ğæ“¾
+// åŸä¸»ã®ãƒãƒƒãƒ—ä¸Šã®åå‰ã‚’å–å¾—
 const char* GetLordMapName(LordId id);
 
 #endif //  __LORD_H

@@ -1,34 +1,34 @@
-//======================================
+ï»¿//======================================
 //	IntList
 //======================================
 #ifndef __INT_LIST_H
 #define __INT_LIST_H
 
 typedef struct {
-	int size;        // ”z—ñƒTƒCƒY
-	int ptr;         // Ši”[ƒ|ƒCƒ“ƒ^
-	int* array;      // ”z—ñ
+	int size;        // é…åˆ—ã‚µã‚¤ã‚º
+	int ptr;         // æ ¼ç´ãƒã‚¤ãƒ³ã‚¿
+	int* array;      // é…åˆ—
 } IntList;
 
-// ‰Šú‰»
+// åˆæœŸåŒ–
 void InitializeIntList(IntList* list, int size);
-// Œãn––
+// å¾Œå§‹æœ«
 void FinalizeIntList(IntList* list);
-// ƒŠƒXƒg‚É’Ç‰Á
+// ãƒªã‚¹ãƒˆã«è¿½åŠ 
 void AddIntList(IntList* list, int value);
-// ƒŠƒXƒg‚Ì—v‘f”‚ğ“¾‚é
+// ãƒªã‚¹ãƒˆã®è¦ç´ æ•°ã‚’å¾—ã‚‹
 int GetCountIntList(IntList* list);
-// ƒŠƒXƒg‚Ì—v‘f‚ğ“¾‚é
+// ãƒªã‚¹ãƒˆã®è¦ç´ ã‚’å¾—ã‚‹
 int GetIntList(IntList* list, int idx);
-// ƒŠƒXƒg‚ğƒNƒŠƒA
+// ãƒªã‚¹ãƒˆã‚’ã‚¯ãƒªã‚¢
 void ClearIntList(IntList* list);
-// ƒŠƒXƒg‚ğƒRƒs[
+// ãƒªã‚¹ãƒˆã‚’ã‚³ãƒ”ãƒ¼
 void CopyIntList(IntList* dst, IntList* src);
-// ƒŠƒXƒg‚ğƒvƒŠƒ“ƒg‚·‚é
+// ãƒªã‚¹ãƒˆã‚’ãƒ—ãƒªãƒ³ãƒˆã™ã‚‹
 void PrintIntList(IntList* list);
-// ƒ\[ƒg‚·‚é
+// ã‚½ãƒ¼ãƒˆã™ã‚‹
 void SortIntList(IntList* list, int comp(int, int));
-// ”z—ñ‚ğæ“¾‚·‚é
+// é…åˆ—ã‚’å–å¾—ã™ã‚‹
 int* GetArrayIntList(IntList* list);
 
 #endif //  __INT_LIST_H

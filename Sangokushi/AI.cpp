@@ -1,5 +1,5 @@
-//======================================
-//	O‘u  AI
+ï»¿//======================================
+//	ä¸‰å›½å¿—  AI
 //======================================
 #include "AI.h"
 #include "IntList.h"
@@ -7,14 +7,14 @@
 #include "CastleId.h"
 #include "Utility.h"  // GetRand()
 
-// ŠÖ”ƒvƒƒgƒ^ƒCƒv
+// é–¢æ•°ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—
 static CastleId getMinTroopCastle(IntList* intList, Stage* stage);
 static bool isFrontCastle(Stage* stage, CastleId caseltId);
 static int cmpCastleByTroop(int a, int b);
 
 static Stage* s_stage;
 
-// NPCƒ^[ƒ“‚Ì“ü—Í(vl)
+// NPCã‚¿ãƒ¼ãƒ³ã®å…¥åŠ›(æ€è€ƒ)
 Command InputNpcTurn(Stage* stage, Castle* castle, CastleId* outTarget, int* outTroopCount)
 {
 	LordId npcLord = GetCastleOwner(castle);
@@ -24,7 +24,7 @@ Command InputNpcTurn(Stage* stage, Castle* castle, CastleId* outTarget, int* out
 	IntList enemyCastleList[1];
 	InitializeIntList(enemyCastleList, CASTLE_MAX);
 
-	// —×Ú‚·‚é“G‚Ìé‚ğƒŠƒXƒeƒBƒ“ƒO
+	// éš£æ¥ã™ã‚‹æ•µã®åŸã‚’ãƒªã‚¹ãƒ†ã‚£ãƒ³ã‚°
 	CastleId* connectedList = GetCastleConnectedList(castle);
 	for (int i = 0; ; i++) {
 		CastleId id = connectedList[i];
@@ -34,12 +34,12 @@ Command InputNpcTurn(Stage* stage, Castle* castle, CastleId* outTarget, int* out
 		}
 	}
 	if (GetCountIntList(enemyCastleList) > 0) {
-		// TroopCountÅ¬‚Ìé‚ğæ“¾
+		// TroopCountæœ€å°ã®åŸã‚’å–å¾—
 		CastleId targetCastle = getMinTroopCastle(enemyCastleList, stage);
 
-		// U‚ß‚ŞğŒƒ`ƒFƒbƒN
-		//  E‚±‚¿‚ç‚Ì•º—Í‚Í•W€’lˆÈã‚Å‚ ‚é‚©?
-		//  E‚±‚¿‚ç‚Ì•º—Í‚ªç”õ•º‚ğ·‚µˆø‚¢‚Ä‘Šè‚Ì2”{ˆÈã‚©?
+		// æ”»ã‚è¾¼ã‚€æ¡ä»¶ãƒã‚§ãƒƒã‚¯
+		//  ãƒ»ã“ã¡ã‚‰ã®å…µåŠ›ã¯æ¨™æº–å€¤ä»¥ä¸Šã§ã‚ã‚‹ã‹?
+		//  ãƒ»ã“ã¡ã‚‰ã®å…µåŠ›ãŒå®ˆå‚™å…µã‚’å·®ã—å¼•ã„ã¦ç›¸æ‰‹ã®2å€ä»¥ä¸Šã‹?
 		int tgtTroopCount = GetCastleTroopCount(stage, targetCastle);
 		if (npcTroopCount >= TROOP_BASE
 			|| npcTroopCount - 1 >= tgtTroopCount * 2) {
@@ -55,12 +55,12 @@ Command InputNpcTurn(Stage* stage, Castle* castle, CastleId* outTarget, int* out
 		}
 	}
 	else {
-		// —×Ú‚·‚é“G‚ª‚¢‚È‚¢
+		// éš£æ¥ã™ã‚‹æ•µãŒã„ãªã„
 		IntList cnnctCastleList[1];
 		IntList frontCastleList[1];
 		InitializeIntList(cnnctCastleList, CASTLE_MAX);
 		InitializeIntList(frontCastleList, CASTLE_MAX);
-		// ‘Oü‚Ìé‚ğƒŠƒXƒeƒBƒ“ƒO
+		// å‰ç·šã®åŸã‚’ãƒªã‚¹ãƒ†ã‚£ãƒ³ã‚°
 		for (int i = 0; ; i++) {
 			CastleId id = connectedList[i];
 			if (id == CASTLE_NONE) break;
@@ -76,7 +76,7 @@ Command InputNpcTurn(Stage* stage, Castle* castle, CastleId* outTarget, int* out
 			targetCastle = getMinTroopCastle(frontCastleList, stage);
 			sendTroopCount = TROOP_MAX - GetCastleTroopCount(stage, targetCastle);
 			if (sendTroopCount > npcTroopCount) {
-				// ‘Oü‚Ìé‚É‘—‚é‚È‚çA‘S•”
+				// å‰ç·šã®åŸã«é€ã‚‹ãªã‚‰ã€å…¨éƒ¨
 				sendTroopCount = npcTroopCount;
 			}
 		}
@@ -85,7 +85,7 @@ Command InputNpcTurn(Stage* stage, Castle* castle, CastleId* outTarget, int* out
 			sendTroopCount = TROOP_MAX - GetCastleTroopCount(stage, targetCastle);
 			int tmp = npcTroopCount - (TROOP_BASE - 1);
 			if (sendTroopCount > tmp) {
-				// ‘Oü‚Å‚È‚¢‚È‚çABASE-1 ‚ğc‚µ‚ÄA‚»‚ê‚æ‚è‘å‚«‚¢•ª‚ğ
+				// å‰ç·šã§ãªã„ãªã‚‰ã€BASE-1 ã‚’æ®‹ã—ã¦ã€ãã‚Œã‚ˆã‚Šå¤§ãã„åˆ†ã‚’
 				sendTroopCount = tmp;
 			}
 		}
@@ -101,13 +101,13 @@ Command InputNpcTurn(Stage* stage, Castle* castle, CastleId* outTarget, int* out
 
 	return cmd;
 }
-// CastleIdƒŠƒXƒg‚©‚ç TroopÅ¬‚ğæ“¾‚·‚é
+// CastleIdãƒªã‚¹ãƒˆã‹ã‚‰ Troopæœ€å°ã‚’å–å¾—ã™ã‚‹
 static CastleId getMinTroopCastle(IntList* intList, Stage* stage)
 {
-	// TroopCount‚Ì¬‚³‚¢‡‚Éƒ\[ƒg
+	// TroopCountã®å°ã•ã„é †ã«ã‚½ãƒ¼ãƒˆ
 	s_stage = stage;
 	SortIntList(intList, cmpCastleByTroop);
-	// TroopCountÅ¬‚Ì”‚ğ‚©‚¼‚¦‚é
+	// TroopCountæœ€å°ã®æ•°ã‚’ã‹ããˆã‚‹
 	int* array = GetArrayIntList(intList);
 	int  count = GetCountIntList(intList);
 	int minTroopCount = GetCastleTroopCount(stage, (CastleId)array[0]);
@@ -117,14 +117,14 @@ static CastleId getMinTroopCastle(IntList* intList, Stage* stage)
 			break;
 		}
 	}
-	// TroopCountÅ¬‚Ì’†‚©‚çƒ‰ƒ“ƒ_ƒ€‚É‘I‚Ô
+	// TroopCountæœ€å°ã®ä¸­ã‹ã‚‰ãƒ©ãƒ³ãƒ€ãƒ ã«é¸ã¶
 	int idx = GetRand(i);
 	return (CastleId)array[idx];
 }
-// ‘Oü‚Ìé‚©?
+// å‰ç·šã®åŸã‹?
 static bool isFrontCastle(Stage* stage, CastleId castleId)
 {
-	// —×Ú‚É“G‚ª‚¢‚ê‚Î‘Oü‚Ìé‚Å‚ ‚é
+	// éš£æ¥ã«æ•µãŒã„ã‚Œã°å‰ç·šã®åŸã§ã‚ã‚‹
 	CastleId* connectedList = GetCastleConnectedList(stage, castleId);
 	LordId owner = GetCastleOwner(stage, castleId);
 	for (int i = 0; ; i++) {
@@ -136,7 +136,7 @@ static bool isFrontCastle(Stage* stage, CastleId castleId)
 	}
 	return false;
 }
-// ƒ\[ƒg‚Ì‚½‚ß‚Ì”äŠrŠÖ”
+// ã‚½ãƒ¼ãƒˆã®ãŸã‚ã®æ¯”è¼ƒé–¢æ•°
 static int cmpCastleByTroop(int a, int b)
 {
 	int troop_a = GetCastleTroopCount(s_stage, (CastleId)a);

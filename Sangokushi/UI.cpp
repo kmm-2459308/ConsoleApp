@@ -1,5 +1,5 @@
-//======================================
-//	O‘u  UI
+ï»¿//======================================
+//	ä¸‰å›½å¿—  UI
 //======================================
 #include "UI.h"
 #include "Stage.h"
@@ -9,31 +9,31 @@
 #include "Troop.h"
 #include <stdio.h>
 #include <string.h> // strchr()
-// ŠÖ”ƒvƒƒgƒ^ƒCƒv
+// é–¢æ•°ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—
 static int getKeyInRange(int min, int max);
 static char getKeyInList(const char* list);
 
-// ƒvƒŒ[ƒ„ID‚ğ“ü—Í‚·‚é
+// ãƒ—ãƒ¬ãƒ¼ãƒ¤IDã‚’å…¥åŠ›ã™ã‚‹
 CastleId InputPlayerCastle(Stage* stage)
 {
 	DrawScreen(stage, DM_Intro, 0);
-	printf("‚í‚ª‚«‚İA‚í‚ê‚ç‚ª‚µ‚ë‚Í@‚±‚Ì‚¿‚¸‚Ì\n"
-		"‚Ç‚±‚É@‚ ‚è‚Ü‚·‚é‚©HIi0`%dj\n", stage->castlesSize - 1);
+	printf("ã‚ãŒãã¿ã€ã‚ã‚Œã‚‰ãŒã—ã‚ã¯ã€€ã“ã®ã¡ãšã®\n"
+		"ã©ã“ã«ã€€ã‚ã‚Šã¾ã™ã‚‹ã‹ï¼Ÿï¼ï¼ˆ0ï½%dï¼‰\n", stage->castlesSize - 1);
 	putchar('\n');
 
 	int num = getKeyInRange(0, stage->castlesSize - 1);
 	return (CastleId)num;
 }
-// ƒvƒŒ[ƒ„ƒ^[ƒ“‚Ì‹““®‚ğ“ü—Í
+// ãƒ—ãƒ¬ãƒ¼ãƒ¤ã‚¿ãƒ¼ãƒ³ã®æŒ™å‹•ã‚’å…¥åŠ›
 Command InputPlayerTurn(Stage* stage, Castle* castle, CastleId* outTarget, int* outTroopCount)
 {
 	const char CANCEL = 'x';
 	char list[CASTLE_MAX + 2];
 	char* listp;
 	//
-	// iŒRæ‚ğ“ü—Í
+	// é€²è»å…ˆã‚’å…¥åŠ›
 	//
-	printf("%s‚³‚ÜA‚Ç‚±‚É@‚µ‚ñ‚®‚ñ@‚µ‚Ü‚·‚©H\n", GetLordFirstName(stage, stage->playerLord));
+	printf("%sã•ã¾ã€ã©ã“ã«ã€€ã—ã‚“ãã‚“ã€€ã—ã¾ã™ã‹ï¼Ÿ\n", GetLordFirstName(stage, stage->playerLord));
 	putchar('\n');
 
 	listp = list;
@@ -41,11 +41,11 @@ Command InputPlayerTurn(Stage* stage, Castle* castle, CastleId* outTarget, int* 
 	for (int i = 0; ; i++) {
 		CastleId id = connectedList[i];
 		if (id == CASTLE_NONE) break;
-		const char* opt = (GetCastleOwner(stage, id) == stage->playerLord) ? "ˆÚ‘—" : "UŒ‚";
+		const char* opt = (GetCastleOwner(stage, id) == stage->playerLord) ? "ç§»é€" : "æ”»æ’ƒ";
 		printf("%d %s (%s)\n", id, GetCastleName(stage, id), opt);
 		*listp++ = id + '0';
 	}
-	printf("%c ‚µ‚ñ‚®‚ñ‚µ‚È‚¢\n", CANCEL);
+	printf("%c ã—ã‚“ãã‚“ã—ãªã„\n", CANCEL);
 	*listp++ = CANCEL;
 	*listp = '\0';
 	putchar('\n');
@@ -55,7 +55,7 @@ Command InputPlayerTurn(Stage* stage, Castle* castle, CastleId* outTarget, int* 
 		return CMD_Cancel;
 	}
 	//
-	// iŒR‚·‚é•º”‚ğ“ü—Í
+	// é€²è»ã™ã‚‹å…µæ•°ã‚’å…¥åŠ›
 	//
 	CastleId targetId = (CastleId)(c - '0');
 	Command cmd = CMD_Attack;
@@ -68,9 +68,9 @@ Command InputPlayerTurn(Stage* stage, Castle* castle, CastleId* outTarget, int* 
 		}
 		cmd = CMD_Transit;
 	}
-	printf("%s‚É@‚È‚ñ‚Ü‚ñ‚É‚ñ@‚µ‚ñ‚®‚ñ@‚µ‚Ü‚·‚©Hi0`%dj\n"
-		, GetCastleName(stage, targetId)	// iŒRæ‚Ìé‚Ì–¼‘O
-		, troopMax);					    // iŒR•º”
+	printf("%sã«ã€€ãªã‚“ã¾ã‚“ã«ã‚“ã€€ã—ã‚“ãã‚“ã€€ã—ã¾ã™ã‹ï¼Ÿï¼ˆ0ï½%dï¼‰\n"
+		, GetCastleName(stage, targetId)	// é€²è»å…ˆã®åŸã®åå‰
+		, troopMax);					    // é€²è»å…µæ•°
 	putchar('\n');
 	int troopCount = getKeyInRange(0, troopMax);
 
@@ -78,13 +78,13 @@ Command InputPlayerTurn(Stage* stage, Castle* castle, CastleId* outTarget, int* 
 	*outTroopCount = troopCount;
 	return cmd;
 }
-// min`max‚Ì”š‚ğ“ü—Í‚³‚¹‚é
+// minï½maxã®æ•°å­—ã‚’å…¥åŠ›ã•ã›ã‚‹
 static int getKeyInRange(int min, int max)
 {
-	// š‚±‚±‚ğƒR[ƒfƒBƒ“ƒO‚µ‚Ä‚­‚¾‚³‚¢B
-	//  GetKey()‚ÅƒL[“ü—Í‚µAmin`max ‚Ì”šƒL[‚ª
-	//  “ü—Í‚³‚ê‚é‚Ü‚ÅŒJ‚è•Ô‚µ‚Ü‚·
-	//  min`max‚Ì”šƒL[‚ª‰Ÿ‚³‚ê‚½‚çA‚»‚Ì”’l‚ğ•Ô‚µ‚Ü‚·
+	// â˜…ã“ã“ã‚’ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ã—ã¦ãã ã•ã„ã€‚
+	//  GetKey()ã§ã‚­ãƒ¼å…¥åŠ›ã—ã€minï½max ã®æ•°å­—ã‚­ãƒ¼ãŒ
+	//  å…¥åŠ›ã•ã‚Œã‚‹ã¾ã§ç¹°ã‚Šè¿”ã—ã¾ã™
+	//  minï½maxã®æ•°å­—ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸã‚‰ã€ãã®æ•°å€¤ã‚’è¿”ã—ã¾ã™
 	unsigned char c;
 	int num;
 	do {
@@ -93,13 +93,13 @@ static int getKeyInRange(int min, int max)
 	} while (num < min || max < num);
 	return num;
 }
-// list‚É‚ ‚éƒL[‚ğ“ü—Í‚³‚¹‚é
+// listã«ã‚ã‚‹ã‚­ãƒ¼ã‚’å…¥åŠ›ã•ã›ã‚‹
 static char getKeyInList(const char* list)
 {
-	// š‚±‚±‚ğƒR[ƒfƒBƒ“ƒO‚µ‚Ä‚­‚¾‚³‚¢B
-	//  GetKey()‚ÅƒL[“ü—Í‚µAlist•¶š—ñ‚É‚ ‚éƒL[‚ª
-	//  “ü—Í‚³‚ê‚é‚Ü‚ÅŒJ‚è•Ô‚µ‚Ü‚·
-	//  list•¶š—ñ‚É‚ ‚éƒL[‚ª‰Ÿ‚³‚ê‚½‚çA‚»‚Ì•¶š‚ğ•Ô‚µ‚Ü‚·
+	// â˜…ã“ã“ã‚’ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ã—ã¦ãã ã•ã„ã€‚
+	//  GetKey()ã§ã‚­ãƒ¼å…¥åŠ›ã—ã€listæ–‡å­—åˆ—ã«ã‚ã‚‹ã‚­ãƒ¼ãŒ
+	//  å…¥åŠ›ã•ã‚Œã‚‹ã¾ã§ç¹°ã‚Šè¿”ã—ã¾ã™
+	//  listæ–‡å­—åˆ—ã«ã‚ã‚‹ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸã‚‰ã€ãã®æ–‡å­—ã‚’è¿”ã—ã¾ã™
 	char c;
 	do {
 		c = GetKey();

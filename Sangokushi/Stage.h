@@ -1,5 +1,5 @@
-//======================================
-//	O‘u  ƒXƒe[ƒW
+ï»¿//======================================
+//	ä¸‰å›½å¿—  ã‚¹ãƒ†ãƒ¼ã‚¸
 //======================================
 #ifndef __STAGE_H
 #define __STAGE_H
@@ -9,70 +9,70 @@
 #include "Chronology.h"
 
 typedef enum {
-	DM_Intro,    // ƒQ[ƒ€ŠJn
-	DM_Turn,     // ƒ^[ƒ“’†
-	DM_Event,    // ƒCƒxƒ“ƒg”­¶’†
-	DM_GameOver, // ƒQ[ƒ€ƒI[ƒo’†
-	DM_Ending,   // ƒGƒ“ƒfƒBƒ“ƒO’†
+	DM_Intro,    // ã‚²ãƒ¼ãƒ é–‹å§‹æ™‚
+	DM_Turn,     // ã‚¿ãƒ¼ãƒ³ä¸­
+	DM_Event,    // ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿä¸­
+	DM_GameOver, // ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒä¸­
+	DM_Ending,   // ã‚¨ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ä¸­
 } DrawMode;
 
 typedef struct {
 	Castle* castles;
 	int castlesSize;
-	int year;             // ”N
-	LordId playerLord;    // ƒvƒŒ[ƒ„‘å–¼
-	Chronology* chro;     // ”N•\
+	int year;             // å¹´
+	LordId playerLord;    // ãƒ—ãƒ¬ãƒ¼ãƒ¤å¤§å
+	Chronology* chro;     // å¹´è¡¨
 	CastleId turnOrder[CASTLE_MAX];
-	bool isHonnojiEvent;  // –{”\›‚Ì•Ï‚ ‚Á‚½‚©?
+	bool isHonnojiEvent;  // æœ¬èƒ½å¯ºã®å¤‰ã‚ã£ãŸã‹?
 } Stage;
 
-// ‰Šú‰»
+// åˆæœŸåŒ–
 void InitializeStage(Stage* stage, Castle chasles[], int castlesSize, int startYear, Chronology* chro);
-// Œãn––
+// å¾Œå§‹æœ«
 void FinalizeStage(Stage* stage);
-// ƒXƒ^[ƒg
+// ã‚¹ã‚¿ãƒ¼ãƒˆ
 void StartStage(Stage* stage);
-// ƒvƒŒ[ƒ„‘å–¼‚ÌƒZƒbƒg
+// ãƒ—ãƒ¬ãƒ¼ãƒ¤å¤§åã®ã‚»ãƒƒãƒˆ
 void SetPlayerLord(Stage* stage, CastleId playerCastle);
-// ƒCƒ“ƒgƒƒƒbƒZ[ƒW
+// ã‚¤ãƒ³ãƒˆãƒ­ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 void IntroStage(Stage* stage, CastleId playerCastle);
-// ƒXƒNƒŠ[ƒ“•`‰æ
+// ã‚¹ã‚¯ãƒªãƒ¼ãƒ³æç”»
 void DrawScreen(Stage* stage, DrawMode mode, int turn);
-// ƒ^[ƒ“‚Ì‡”Ô‚ğƒVƒƒƒbƒtƒ‹
+// ã‚¿ãƒ¼ãƒ³ã®é †ç•ªã‚’ã‚·ãƒ£ãƒƒãƒ•ãƒ«
 void MakeTurnOrder(Stage* stage);
-// ”N‰z‚µ
+// å¹´è¶Šã—
 void NextYear(Stage* stage);
-// u–{”\›‚Ì•Ïv‚©?
+// ã€Œæœ¬èƒ½å¯ºã®å¤‰ã€ã‹?
 bool IsHonnojiEvent(Stage* stage);
-// u–{”\›‚Ì•Ïvƒtƒ‰ƒOƒZƒbƒg
+// ã€Œæœ¬èƒ½å¯ºã®å¤‰ã€ãƒ•ãƒ©ã‚°ã‚»ãƒƒãƒˆ
 void SetHonnojiEvent(Stage* stage);
-// ƒ^[ƒ“Às
+// ã‚¿ãƒ¼ãƒ³å®Ÿè¡Œ
 void ExecTurn(Stage* stage, int turn);
-// ƒvƒŒ[ƒ„‚Ì•‰‚¯?
+// ãƒ—ãƒ¬ãƒ¼ãƒ¤ã®è² ã‘?
 bool IsPlayerLose(Stage* stage);
-// ƒvƒŒ[ƒ„‚ÌŸ‚¿?
+// ãƒ—ãƒ¬ãƒ¼ãƒ¤ã®å‹ã¡?
 bool IsPlayerWin(Stage* stage);
 //---------------------------------------------------------
-// é‚Ì–¼‘O‚ğæ“¾
+// åŸã®åå‰ã‚’å–å¾—
 const char* GetCastleName(Stage* stage, CastleId castleId);
-// é‚Ìéå‚ğæ“¾
+// åŸã®åŸä¸»ã‚’å–å¾—
 LordId GetCastleOwner(Stage* stage, CastleId castleId);
-// é‚Ìéå‚ğİ’è
+// åŸã®åŸä¸»ã‚’è¨­å®š
 void SetCastleOwner(Stage* stage, CastleId id, LordId owner);
-// é‚Ì•º”‚ğæ“¾
+// åŸã®å…µæ•°ã‚’å–å¾—
 int GetCastleTroopCount(Stage* stage, CastleId id);
-// •º”‚ğƒZƒbƒg
+// å…µæ•°ã‚’ã‚»ãƒƒãƒˆ
 void SetCastleTroopCount(Stage* stage, CastleId id, int troopCount);
-// é‚Ì‹ß—×ƒŠƒXƒg‚ğæ“¾
+// åŸã®è¿‘éš£ãƒªã‚¹ãƒˆã‚’å–å¾—
 CastleId* GetCastleConnectedList(Stage* stage, CastleId id);
-// é‚Ìƒ}ƒbƒv–¼‚ğæ“¾
+// åŸã®ãƒãƒƒãƒ—åã‚’å–å¾—
 const char* GetCastleMapName(Stage* stage, CastleId id);
 //---------------------------------------------------------
-// éå‚Ì–¼‚ğæ“¾
+// åŸä¸»ã®åã‚’å–å¾—
 const char* GetLordFirstName(Stage* stage, LordId id);
-// éå‚Ì©‚ğæ“¾
+// åŸä¸»ã®å§“ã‚’å–å¾—
 const char* GetLordFamilyName(Stage* stage, LordId id);
-// éå‚Ìƒ}ƒbƒvã‚Ì–¼‘O‚ğæ“¾
+// åŸä¸»ã®ãƒãƒƒãƒ—ä¸Šã®åå‰ã‚’å–å¾—
 const char* GetLordMapName(Stage* stage, LordId id);
 
 #endif // __STAGE_H

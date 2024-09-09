@@ -1,21 +1,21 @@
-//======================================
-//	IntList(int‚Ì‰Â•Ï’·”z—ñ)
+ï»¿//======================================
+//	IntList(intã®å¯å¤‰é•·é…åˆ—)
 //======================================
 #include "IntList.h"
 #include <stdio.h>   // printf()
 #include <stdlib.h>  // calloc(),free(),exit()
-// ‰Šú‰»
+// åˆæœŸåŒ–
 void InitializeIntList(IntList* list, int size)
 {
 	list->array = (int*)calloc(size, sizeof(int));
 	if (list->array == nullptr) {
-		printf("calloc¸”s\n");
+		printf("callocå¤±æ•—\n");
 		exit(1);
 	}
 	list->size = size;
 	list->ptr = 0;
 }
-// Œãn––
+// å¾Œå§‹æœ«
 void FinalizeIntList(IntList* list)
 {
 	free(list->array);
@@ -23,19 +23,19 @@ void FinalizeIntList(IntList* list)
 	list->size = 0;
 	list->ptr = 0;
 }
-// ƒŠƒXƒg‚É’Ç‰Á
+// ãƒªã‚¹ãƒˆã«è¿½åŠ 
 void AddIntList(IntList* list, int value)
 {
 	if (list->ptr < list->size) {
 		list->array[list->ptr++] = value;
 	}
 }
-// ƒŠƒXƒg‚Ì—v‘f”‚ğ“¾‚é
+// ãƒªã‚¹ãƒˆã®è¦ç´ æ•°ã‚’å¾—ã‚‹
 int GetCountIntList(IntList* list)
 {
 	return list->ptr;
 }
-// ƒŠƒXƒg‚Ì—v‘f‚ğ“¾‚é
+// ãƒªã‚¹ãƒˆã®è¦ç´ ã‚’å¾—ã‚‹
 int GetIntList(IntList* list, int idx)
 {
 	if (idx < list->ptr) {
@@ -43,12 +43,12 @@ int GetIntList(IntList* list, int idx)
 	}
 	return  -1;
 }
-// ƒŠƒXƒg‚ğƒNƒŠƒA‚·‚é
+// ãƒªã‚¹ãƒˆã‚’ã‚¯ãƒªã‚¢ã™ã‚‹
 void ClearIntList(IntList* list)
 {
 	list->ptr = 0;
 }
-// ƒŠƒXƒg‚ğƒRƒs[‚·‚é
+// ãƒªã‚¹ãƒˆã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹
 void CopyIntList(IntList* dst, IntList* src)
 {
 	ClearIntList(dst);
@@ -58,7 +58,7 @@ void CopyIntList(IntList* dst, IntList* src)
 		AddIntList(dst, value);
 	}
 }
-// ƒŠƒXƒg‚ğƒvƒŠƒ“ƒg(ƒfƒoƒbƒO—p)
+// ãƒªã‚¹ãƒˆã‚’ãƒ—ãƒªãƒ³ãƒˆ(ãƒ‡ãƒãƒƒã‚°ç”¨)
 void PrintIntList(IntList* list)
 {
 	printf("IntList(%d):", list->ptr);
@@ -67,10 +67,10 @@ void PrintIntList(IntList* list)
 	}
 	putchar('\n');
 }
-// ”äŠrŠÖ”‚ğ—p‚¢‚Äƒ\[ƒg
+// æ¯”è¼ƒé–¢æ•°ã‚’ç”¨ã„ã¦ã‚½ãƒ¼ãƒˆ
 void SortIntList(IntList* list, int comp(int, int))
 {
-	// ‘I‘ğƒ\[ƒg‚ğs‚¤
+	// é¸æŠã‚½ãƒ¼ãƒˆã‚’è¡Œã†
 	for (int i = 0; i < list->ptr - 1; i++) {
 		int minIdx = i;
 		int min = list->array[minIdx];
@@ -81,13 +81,13 @@ void SortIntList(IntList* list, int comp(int, int))
 			}
 		}
 		if (minIdx != i) {
-			// array[i]‚Æarray[minIdx] ŒğŠ·
+			// array[i]ã¨array[minIdx] äº¤æ›
 			list->array[minIdx] = list->array[i];
 			list->array[i] = min;
 		}
 	}
 }
-// ”z—ñ‚ğæ“¾‚·‚é
+// é…åˆ—ã‚’å–å¾—ã™ã‚‹
 int* GetArrayIntList(IntList* list)
 {
 	return list->array;

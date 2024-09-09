@@ -1,5 +1,5 @@
-//======================================
-//	ƒ†[ƒeƒBƒŠƒeƒB
+ï»¿//======================================
+//	ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£
 //======================================
 #include "Utility.h" // eKey
 #include <stdlib.h> // srand()
@@ -28,24 +28,24 @@ const char* EscBgCYAN = "\x1b[46m";
 const char* EscBgWHITE = "\x1b[47m";
 const char* EscBgDEFAULT = "\x1b[49m";
 
-// —”‰Šú‰»
+// ä¹±æ•°åˆæœŸåŒ–
 void InitRand()
 {
 	srand((unsigned int)time(NULL));
 }
-// 0`max-1 ‚Ìˆê—l—”‚ğ“¾‚é
+// 0ï½max-1 ã®ä¸€æ§˜ä¹±æ•°ã‚’å¾—ã‚‹
 int GetRand(int max)
 {
 	int x = (rand() * max) / RAND_MAX;
 	return x;
 }
-// ƒL[“ü—Í‚ğ‘Ò‚Â
+// ã‚­ãƒ¼å…¥åŠ›ã‚’å¾…ã¤
 void WaitKey()
 {
 	_getch();
 }
 
-// ƒL[æ“¾
+// ã‚­ãƒ¼å–å¾—
 Key GetKey()
 {
 	int key = _getch();
@@ -55,47 +55,47 @@ Key GetKey()
 	}
 	return (Key)key;
 }
-// ƒL[“ü—Í‚ ‚è‚©?
+// ã‚­ãƒ¼å…¥åŠ›ã‚ã‚Šã‹?
 bool KeyAvailable()
 {
 	return _kbhit();
 }
-// ƒXƒNƒŠ[ƒ“Á‹
+// ã‚¹ã‚¯ãƒªãƒ¼ãƒ³æ¶ˆå»
 void ClearScreen()
 {
 #if false
-	// cmd.exe ‚ğŒÄ‚Ño‚µ‚Ä cls ‚ğs‚¤
+	// cmd.exe ã‚’å‘¼ã³å‡ºã—ã¦ cls ã‚’è¡Œã†
 	system("cls");
 #else
 	static bool s_modeSet = false;
 
-	// ‰æ–Êƒ‚[ƒh‚ğØ‚è‘Ö‚¦‚ÄƒGƒXƒP[ƒvƒV[ƒPƒ“ƒX‚ªg‚¦‚é‚æ‚¤‚É‚·‚é
+	// ç”»é¢ãƒ¢ãƒ¼ãƒ‰ã‚’åˆ‡ã‚Šæ›¿ãˆã¦ã‚¨ã‚¹ã‚±ãƒ¼ãƒ—ã‚·ãƒ¼ã‚±ãƒ³ã‚¹ãŒä½¿ãˆã‚‹ã‚ˆã†ã«ã™ã‚‹
 	if (s_modeSet == false) {
 		s_modeSet = true;
 		HANDLE h = GetStdHandle(-11);
 		SetConsoleMode(h, 0x07);
 	}
-	printf("\x1b[2J"	// ‰æ–ÊƒNƒŠƒA
-		"\x1b[1;1H");	// ƒJ[ƒ\ƒ‹‚ğ1,1‚É
+	printf("\x1b[2J"	// ç”»é¢ã‚¯ãƒªã‚¢
+		"\x1b[1;1H");	// ã‚«ãƒ¼ã‚½ãƒ«ã‚’1,1ã«
 #endif
 }
-// ƒJ[ƒ\ƒ‹ˆÊ’uƒZƒbƒg
+// ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ã‚»ãƒƒãƒˆ
 void PrintCursor(int curx, int cury)
 {
-	// curx.cury‚Í(1,1)‚©‚ç
+	// curx.curyã¯(1,1)ã‹ã‚‰
 	printf("\x1b[%d;%dH", cury, curx);
 }
-// ƒJ[ƒ\ƒ‹•Û‘¶
+// ã‚«ãƒ¼ã‚½ãƒ«ä¿å­˜
 void SaveCursor()
 {
 	printf("\x1b[s");
 }
-// ƒJ[ƒ\ƒ‹•œŒ³
+// ã‚«ãƒ¼ã‚½ãƒ«å¾©å…ƒ
 void RestoreCursor()
 {
 	printf("\x1b[u");
 }
-// ŠÔ‘Ò‚¿(m•b)
+// æ™‚é–“å¾…ã¡(mç§’)
 void Sleep_mSec(int mSec)
 {
 	Sleep(mSec);
