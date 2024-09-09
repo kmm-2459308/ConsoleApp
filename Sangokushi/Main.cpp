@@ -15,8 +15,8 @@ static void DrawEnding(Stage* stage);
 
 int main()
 {
+    system("chcp 65001");// [6-5-0]コンソールの文字セットをUTF-8に設定する
     InitRand();
-
     int c;
     do {
         game();
