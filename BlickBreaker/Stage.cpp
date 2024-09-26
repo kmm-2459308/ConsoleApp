@@ -4,6 +4,7 @@
 #include "Stage.h"
 #include "Utility.h"
 #include <stdio.h>
+#include <math.h>
 
 // 関数プロトタイプ
 static void InitPaddle(Stage* stage);
@@ -13,6 +14,8 @@ static bool IsInField(int x, int y);
 static bool IsBallPosition(Stage* stage, int x, int y);
 static bool IsPaddlePosition(Stage* stage, int x, int y);
 static void DrawHorizontalWall();
+static float ReverseVelocity(float velocity, int sign);
+static float AddVelocity(float velocity, float add);
 
 const char* AA_WALL = "■";
 const char* AA_BALL = "●";
@@ -56,8 +59,10 @@ void ResetBall(Stage* stage)
 	// ★ここをコーディングしてください。
 	// ボールの位置、Yをフイールド高さの1/3、Xをランダム値にします
 	// ボールの速度、Yは下(1)へ、Xは乱数で左(-1)または右(1)にします
-	stage->ballX = GetRand(FIELD_WIDTH);
-	stage->ballY = FIELD_HEIGHT / 3;
+	//stage->ballX = GetRand(FIELD_WIDTH);
+	//stage->ballY = FIELD_HEIGHT / 3;
+	stage->f_ballX = GetRand(FIELD_WIDTH);
+	stage->f_ballY = FIELD_HEIGHT / 3;
 	stage->ballVelocityX = GetRand(2) == 0 ? 1 : -1;
 	stage->ballVelocityY = 1;
 }
@@ -114,7 +119,8 @@ static bool IsBallPosition(Stage* stage, int x, int y)
 {
 	// ★ここをコーディングしてください
 	// (x,y)がボール位置か判定して真偽を返します
-	return x == stage->ballX && y == stage->ballY;
+	//return x == stage->ballX && y == stage->ballY;
+	return x == stage->f_ballX && y == stage->f_ballY;
 }
 // パドルの位置か?
 static bool IsPaddlePosition(Stage* stage, int x, int y)
@@ -142,11 +148,15 @@ static void DrawHorizontalWall()
 // ボールの移動
 void MoveBall(Stage* stage)
 {
-	stage->ballX += stage->ballVelocityX;
-	stage->ballY += stage->ballVelocityY;
+	//stage->ballX += stage->ballVelocityX;
+	//stage->ballY += stage->ballVelocityY;
+	stage->f_ballX += stage->ballVelocityX;
+	stage->f_ballY += stage->ballVelocityY;
+	stage->f_ballX = (int)floor(stage->f_ballX + 0.5f);
+	stage->f_ballY = (int)floor(stage->f_ballY + 0.5f);
 
 	// ボールが端にあるなら速度反転
-	if (stage->ballX <= 0) {
+	/*if (stage->ballX <= 0) {
 		stage->ballVelocityX = 1;
 	}
 	else if (stage->ballX >= FIELD_WIDTH - 1) {
@@ -165,6 +175,29 @@ void MoveBall(Stage* stage)
 			stage->ballVelocityX = (stage->ballX < stage->paddleX + PADDLE_WIDTH / 2) ? -1 : 1;
 			stage->ballVelocityY = -1;
 		}
+	}*/
+	if (stage->ballX <= 0) {
+		stage->ballVelocityX = ReverseVelocity(stage->ballVelocityX, 1);
+	}
+	else if (stage->ballX >= FIELD_WIDTH - 1) {
+		stage->ballVelocityX = ReverseVelocity(stage->ballVelocityX, -1);
+	}
+	if (stage->ballY <= 0) {
+		stage->ballVelocityY = ReverseVelocity(stage->ballVelocityY, 1);
+	}
+	else if (stage->ballY >= FIELD_HEIGHT - 1) {
+		stage->ballVelocityY = ReverseVelocity(stage->ballVelocityY, -1);
+	}
+	// ボールがハドルに当たったら反射
+	if (stage->ballY == stage->paddleY - 1) {
+		if (stage->ballX >= stage->paddleX - 1
+			&& stage->ballX <= stage->paddleX + PADDLE_WIDTH + 1) {
+			int x = (stage->ballX < stage->paddleX + PADDLE_WIDTH / 2) ? -1 : 1;
+			stage->ballVelocityX = ReverseVelocity(stage->ballVelocityX, x);
+			stage->ballVelocityY = ReverseVelocity(stage->ballVelocityY, -1);
+			float addX = (GetRand(3) - 1) * 0.1f;
+			stage->ballVelocityX = AddVelocity(stage->ballVelocityX, addX);
+		}
 	}
 	// ボールの上3コマのブロックを消す
 	for (int x = stage->ballX - 1; x <= stage->ballX + 1; x++) {
@@ -180,7 +213,8 @@ bool IsBallMiss(Stage* stage)
 {
 	// ★ここをコーディングしてください
 	// ボールのY座標が、フィールド最下に達したかで真偽を返します
-	return stage->ballY >= FIELD_HEIGHT - 1;
+	//return stage->ballY >= FIELD_HEIGHT - 1;
+	return stage->f_ballY >= FIELD_HEIGHT - 1;
 }
 // 面クリア?
 bool IsClear(Stage* stage)
@@ -239,4 +273,38 @@ static bool IsInField(int x, int y)
 	// (x,y)がフィールド内か判定して、真偽を返します
 	return 0 <= x && x < FIELD_WIDTH
 		&& 0 <= y && y < FIELD_HEIGHT;
+}
+
+static float ReverseVelocity(float velocity, int sign)
+{
+	velocity = fabsf(velocity) * sign;
+	return velocity;
+}
+static float AddVelocity(float velocity, float add)
+{
+	const float LIMIT = 0.1f;
+	velocity += add;
+	if (velocity >= 0)
+	{
+		if (velocity < 1 - LIMIT)
+		{
+			velocity = 1 - LIMIT;
+		}
+		else if (velocity > 1 + LIMIT)
+		{
+			velocity = 1 + LIMIT;
+		}
+	}
+	else
+	{
+		if (velocity < -1 - LIMIT)
+		{
+			velocity = -1 - LIMIT;
+		}
+		else if (velocity > -1 + LIMIT)
+		{
+			velocity = -1 + LIMIT;
+		}
+	}
+	return 0;
 }
