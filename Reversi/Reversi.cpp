@@ -12,8 +12,8 @@ const char* getTurnName(Cell turn);
 
 const char* diskAA[] = {
 	"ÅE",  // NONE
-	"Åú",  // BLACK
-	"ÅZ",  // WHITE
+	"ÅZ",  // BLACK
+	"Åú",  // WHITE
 	"Å°",  // OUT
 };
 

@@ -276,9 +276,16 @@ bool IsPlayerWin(Stage* stage)
 static void printTurnOrder(Stage* stage, int turn)
 {
 	for (int i = 0; i < stage->castlesSize; i++) {
-		const char* cur = (i == turn) ? "＞" : "　";
 		CastleId id = (CastleId)stage->turnOrder[i];
-		printf("%s%s", cur, GetCastleMapName(stage, id));
+		const char* mapName = GetCastleMapName(stage, id);
+
+		// 現在のターンの城の場合に背面を青にして表示
+		if (i == turn) {
+			printf("\033[44m %s \033[0m", mapName);  // 背景色青（44）を有効にして表示
+		}
+		else {
+			printf(" %s", mapName);
+		}
 	}
 	putchar('\n');
 	putchar('\n');
