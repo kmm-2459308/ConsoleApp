@@ -39,8 +39,8 @@ const Block defaultField[FIELD_HEIGHT][FIELD_WIDTH] = {
 const char* blockAA[] = {
 	"  ", //BLK_NONE
 	"＋", //BLK_WALL
-	"◆", //BLK_FIX
-	"◇", //BLK_FALL
+	"◆ ", //BLK_FIX
+	"◇ ", //BLK_FALL
 };
 // ステージ初期化
 void InitializeStage(Stage* stage)

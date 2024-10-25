@@ -126,7 +126,7 @@ const char* GetMapAA(char c)
     case '#':   return "”";  // ‹´
     case 'K':   return "‰¤";  // ‰¤—l‚Ìé
     case 'B':   return "–‚";  // –‚‰¤‚Ìé
-    case 'H':   return " ";  // •Ç
+    case 'H':   return "  ";  // •Ç
     case 'W':   return "‰Š";  // ‰Š
     case 'Y':   return "‚x";  // C‘ä
     case '0':   return "‰¤";  // ‰¤
